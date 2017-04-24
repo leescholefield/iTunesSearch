@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +33,10 @@ public class Request {
 
 
     /**
-     * Private constructor. Use one of the static constructor methods.
+     * Package private constructor used by the Response class. For normal instantiation use one of the static factory
+     * methods.
      */
-    private Request(Map<Keys, String> requestParams){
+    Request(Map<Keys, String> requestParams){
         paramMap = requestParams;
     }
 
@@ -51,6 +54,23 @@ public class Request {
         }
 
         return builder.toString();
+    }
+
+    public Response sendRequest(){
+        SimpleHttpRequest req = new SimpleHttpRequest();
+        try{
+            return req.sendRequest(this);
+        } catch(MalformedURLException e){
+
+        } catch(IOException e){
+
+        }
+        return null;
+
+    }
+
+    Map<Keys, String> getParamMap(){
+        return paramMap;
     }
 
 
