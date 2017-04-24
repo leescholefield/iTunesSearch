@@ -18,7 +18,8 @@ public class Request {
         LIMIT,
         LANG,
         VERSION,
-        EXPLICIT;
+        EXPLICIT,
+        OFFSET;
 
         @Override
         public String toString() {
@@ -132,6 +133,14 @@ public class Request {
                 val = "No";
             }
             this.paramMap.put(Request.Keys.EXPLICIT, val);
+            return this;
+        }
+
+        /**
+         * Used for Pagination. The default is 0.
+         */
+        public RequestFactory offset(int offset){
+            this.paramMap.put(Keys.OFFSET, String.valueOf(offset));
             return this;
         }
     } // end of factory class
