@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  *
  */
-interface Response {
+public interface Response {
 
     /**
      * Returns a Request instance for the next page.
