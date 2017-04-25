@@ -8,11 +8,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- *  Used by the Request class as the default way to send a request to the iTunes Search Api.
+ *  Used by the RequestImpl class as the default way to send a request to the iTunes Search Api.
  */
 class SimpleHttpRequest {
 
-    public Response sendRequest(Request request) throws MalformedURLException, IOException{
+    Response sendRequest(Request request) throws IOException{
         URL url = new URL(request.createUrl());
         InputStream is = url.openStream();
 
@@ -24,6 +24,6 @@ class SimpleHttpRequest {
             result.append(line);
         }
 
-        return new Response(request.getParamMap(), result.toString());
+        return new ResponseImpl(request.getParamMap(), result.toString());
     }
 }
