@@ -2,7 +2,6 @@ package request;
 
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -33,7 +32,6 @@ public class RequestImplTest {
         String actual = RequestImpl.createUrl(testParam, 0);
 
         assertEquals(expected, actual);
-
     }
 
 }
