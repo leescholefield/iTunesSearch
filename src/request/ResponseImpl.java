@@ -22,7 +22,7 @@ class ResponseImpl implements Response {
 
     @Override
     public Response nextPage(){
-        return request.nextPageUrl();
+        return null;
     }
 
     @Override

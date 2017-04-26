@@ -32,7 +32,10 @@ class RequestImpl implements Request {
         return createUrl(paramMap, currentOffset);
     }
 
-    private static String createUrl(Map<Keys, String> paramMap, int offset){
+    /**
+     * Package-private so can be tested.
+     */
+    static String createUrl(Map<Keys, String> paramMap, int offset){
         final String urlBase = "https://itunes.apple.com/search?";
 
         StringBuilder builder = new StringBuilder();
