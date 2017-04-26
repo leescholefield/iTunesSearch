@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  */
-public class RequestFactory {
+public class RequestBuilder {
 
     private Map<RequestImpl.Keys, String> paramMap = new HashMap<>();
 
@@ -15,7 +15,7 @@ public class RequestFactory {
     }
 
     /* term is the only required value for a RequestImpl */
-    public RequestFactory(String term){
+    public RequestBuilder(String term){
         this.paramMap.put(RequestImpl.Keys.TERM, term);
     }
 
@@ -23,22 +23,22 @@ public class RequestFactory {
      * Constructor methods.
      */
 
-    public RequestFactory country(String country){
+    public RequestBuilder country(String country){
         this.paramMap.put(RequestImpl.Keys.COUNTRY, country);
         return this;
     }
 
-    public RequestFactory media(String mediaType){
+    public RequestBuilder media(String mediaType){
         this.paramMap.put(RequestImpl.Keys.MEDIA, mediaType);
         return this;
     }
 
-    public RequestFactory entity(String entity){
+    public RequestBuilder entity(String entity){
         this.paramMap.put(RequestImpl.Keys.ENTITY, entity);
         return this;
     }
 
-    public RequestFactory attribute(String attribute){
+    public RequestBuilder attribute(String attribute){
         this.paramMap.put(RequestImpl.Keys.ATTRIBUTE, attribute);
         return this;
     }
@@ -47,7 +47,7 @@ public class RequestFactory {
      * Number of results for the itunes request to return.
      * @param limit must be between 0 and 200.
      */
-    public RequestFactory limit(int limit){
+    public RequestBuilder limit(int limit){
         if(limit >= 0 && limit <= 200){
             this.paramMap.put(RequestImpl.Keys.LIMIT, String.valueOf(limit));
             return this;
@@ -55,7 +55,7 @@ public class RequestFactory {
         throw new IllegalArgumentException("limit must be between 0 and 200");
     }
 
-    public RequestFactory language(String language){
+    public RequestBuilder language(String language){
         this.paramMap.put(RequestImpl.Keys.LANG, language);
         return this;
     }
@@ -64,7 +64,7 @@ public class RequestFactory {
      * The results version to be returned by the itunes request.
      * @param version either 1 or 2
      */
-    public RequestFactory version(int version){
+    public RequestBuilder version(int version){
         if(version == 1 || version == 2){
             this.paramMap.put(RequestImpl.Keys.VERSION, String.valueOf(version));
             return this;
@@ -75,7 +75,7 @@ public class RequestFactory {
     /**
      * Whether explicit content should be included in the returned results.
      */
-    public RequestFactory explicit(boolean explicit){
+    public RequestBuilder explicit(boolean explicit){
         String val = "Yes";
         if(!explicit){
             val = "No";
@@ -87,7 +87,7 @@ public class RequestFactory {
     /**
      * Used for Pagination. The default is 0.
      */
-    public RequestFactory offset(int offset){
+    public RequestBuilder offset(int offset){
         this.paramMap.put(Request.Keys.OFFSET, String.valueOf(offset));
         return this;
     }
