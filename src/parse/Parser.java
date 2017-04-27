@@ -6,8 +6,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -21,8 +19,7 @@ public class Parser {
         Gson gson = new GsonBuilder().registerTypeAdapter(type, new ItemDeserializer())
                 .create();
 
-        List<Item> resultArray = gson.fromJson(jsonString, type);
-        return resultArray;
+        return gson.fromJson(jsonString, type);
     }
 
 
