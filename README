@@ -1,7 +1,0 @@
-
-TODOs:
-todo 26/5/2017 -- Write own implementation of gson JsonDeserializer.
-    Need to use different models to parse different types of content returned by the iTunes Search Api.
-    Need look up more details but seems to depend of the 'wrapperType' value. For instance,
-        "wrapperType":"collection" will mean an album. And then it will have another value called "collectionType" set
-         to "Album".
