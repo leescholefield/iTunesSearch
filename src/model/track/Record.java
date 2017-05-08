@@ -3,7 +3,7 @@ package model.track;
 /**
  *
  */
-public class Record extends Audio {
+class Record extends Audio {
 
     private String previewUrl;
 
