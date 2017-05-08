@@ -14,7 +14,7 @@ public class Song extends Record {
     private String collectionArtistViewUrl;
 
     @Override
-    protected ItemType getType() {
+    public ItemType getType() {
         return ItemType.SONG;
     }
 

@@ -23,7 +23,7 @@ public class FeatureMovie extends Track {
     private boolean hasITunesExtras;
 
     @Override
-    protected ItemType getType() {
+    public ItemType getType() {
         return ItemType.FEATURE_MOVIE;
     }
 

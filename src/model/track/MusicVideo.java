@@ -10,7 +10,7 @@ public class MusicVideo extends Record {
     private String contentAdvisoryRating;
 
     @Override
-    protected ItemType getType() {
+    public ItemType getType() {
         return ItemType.MUSIC_VIDEO;
     }
 

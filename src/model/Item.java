@@ -6,7 +6,7 @@ package model;
  */
 public abstract class Item {
 
-    protected enum ItemType{
+    public enum ItemType{
         SONG,
         MUSIC_VIDEO,
         PODCAST,
@@ -15,7 +15,7 @@ public abstract class Item {
         AUDIOBOOK
     }
 
-    protected abstract ItemType getType();
+    public abstract ItemType getType();
 
 
 }

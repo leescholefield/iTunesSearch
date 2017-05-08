@@ -18,7 +18,7 @@ public class Artist extends Item {
     private long primaryGenreId;
 
     @Override
-    protected ItemType getType() {
+    public ItemType getType() {
         return ItemType.ARTIST;
     }
 

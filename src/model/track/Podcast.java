@@ -22,7 +22,7 @@ public class Podcast extends Audio {
     private String contentAdvisoryRating;
 
     @Override
-    protected ItemType getType() {
+    public ItemType getType() {
         return ItemType.PODCAST;
     }
 

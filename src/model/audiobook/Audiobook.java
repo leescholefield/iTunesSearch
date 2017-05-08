@@ -39,7 +39,7 @@ public class Audiobook extends Item {
     private String country;
 
     @Override
-    protected ItemType getType() {
+    public ItemType getType() {
         return ItemType.AUDIOBOOK;
     }
 
