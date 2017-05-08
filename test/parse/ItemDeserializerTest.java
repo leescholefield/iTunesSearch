@@ -1,12 +1,13 @@
 package parse;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import model.Item;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -27,14 +28,27 @@ public class ItemDeserializerTest {
         }
     }
 
+    private JsonElement getJsonElement(String type) throws IOException, IllegalArgumentException{
+        String content = readFile("data/type_examples");
+        if (content == null){
+            throw new IOException("Could not open file");
+        }
+
+        JsonElement obj = new JsonParser().parse(content);
+        JsonElement elem = obj.getAsJsonObject().get(type);
+        if (elem == null){
+            throw new IllegalArgumentException(type + " is not a recognized type");
+        }
+
+        return elem;
+    }
+
     /**
      * Tests whether ItemDeserializer correctly parses JSON into a Song object.
      */
     @Test
-    public void isSong(){
-        String textContent = readFile("data/type_examples");
-        JsonElement obj = new JsonParser().parse(textContent);
-        JsonElement song = obj.getAsJsonObject().get("song");
+    public void isSong() throws Exception{
+        JsonElement song = getJsonElement("song");
 
         List<Item> response = deserializer.deserialize(song, Item.class, null);
 
@@ -46,10 +60,8 @@ public class ItemDeserializerTest {
      * Tests whether ItemDeserializer correctly parses JSON into an Artist object.
      */
     @Test
-    public void isArtist(){
-        String textContent = readFile("data/type_examples");
-        JsonElement obj = new JsonParser().parse(textContent);
-        JsonElement artist = obj.getAsJsonObject().get("artist");
+    public void isArtist() throws Exception{
+        JsonElement artist = getJsonElement("artist");
 
         List<Item> response = deserializer.deserialize(artist, Item.class, null);
 
@@ -61,10 +73,8 @@ public class ItemDeserializerTest {
      * Tests whether ItemDeserializer correctly parses JSON into an Audiobook object.
      */
     @Test
-    public void isAudiobook(){
-        String textContent = readFile("data/type_examples");
-        JsonElement obj = new JsonParser().parse(textContent);
-        JsonElement audiobook = obj.getAsJsonObject().get("audiobook");
+    public void isAudiobook() throws Exception{
+        JsonElement audiobook = getJsonElement("audiobook");
 
         List<Item> response = deserializer.deserialize(audiobook, Item.class, null);
 
