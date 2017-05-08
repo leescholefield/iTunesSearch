@@ -1,0 +1,51 @@
+{
+  "resultsCount": 6,
+  "song":
+      {"results": [
+                {
+                "wrapperType": "track",
+                "kind": "song",
+                "artistId": 909253,
+                "collectionId": 879273552,
+                "trackId": 879273565,
+                "artistName": "Jack Johnson",
+                "collectionName": "In Between Dreams",
+                "trackName": "Better Together",
+                "collectionCensoredName": "In Between Dreams",
+                "trackCensoredName": "Better Together",
+                "artistViewUrl": "https://itunes.apple.com/us/artist/jack-johnson/id909253?uo=4",
+                "collectionViewUrl": "https://itunes.apple.com/us/album/better-together/id879273552?i=879273565&uo=4",
+                "trackViewUrl": "https://itunes.apple.com/us/album/better-together/id879273552?i=879273565&uo=4",
+                "previewUrl": "http://a25.phobos.apple.com/us/r30/Music6/v4/13/22/67/1322678b-e40d-fb4d-8d9b-3268fe03b000/mzaf_8818596367816221008.plus.aac.p.m4a",
+                "artworkUrl30": "http://is3.mzstatic.com/image/thumb/Music2/v4/a2/66/32/a2663205-663c-8301-eec7-57937c2d0878/source/30x30bb.jpg",
+                "artworkUrl60": "http://is3.mzstatic.com/image/thumb/Music2/v4/a2/66/32/a2663205-663c-8301-eec7-57937c2d0878/source/60x60bb.jpg",
+                "artworkUrl100": "http://is3.mzstatic.com/image/thumb/Music2/v4/a2/66/32/a2663205-663c-8301-eec7-57937c2d0878/source/100x100bb.jpg",
+                "collectionPrice": 8.99,
+                "trackPrice": 1.29,
+                "releaseDate": "2005-03-01T08:00:00Z",
+                "collectionExplicitness": "notExplicit",
+                "trackExplicitness": "notExplicit",
+                "discCount": 1,
+                "discNumber": 1,
+                "trackCount": 15,
+                "trackNumber": 1,
+                "trackTimeMillis": 207679,
+                "country": "USA",
+                "currency": "USD",
+                "primaryGenreName": "Rock",
+                "isStreamable": true
+                }
+        ]
+      },
+  "artist":
+    {
+      "results": [
+        {"wrapperType":"artist", "artistType":"Artist", "artistName":"Jack Johnson", "artistLinkUrl":"https://itunes.apple.com/us/artist/jack-johnson/id909253?uo=4", "artistId":909253, "amgArtistId":468749, "primaryGenreName":"Rock", "primaryGenreId":21}
+      ]
+    },
+  "audiobook":
+  {
+    "results": [
+      {"wrapperType":"audiobook", "artistId":2671774, "collectionId":325114058, "artistName":"Charles Dickens", "collectionName":"Hard Times (Unabridged)", "collectionCensoredName":"Hard Times (Unabridged)", "artistViewUrl":"https://itunes.apple.com/us/author/charles-dickens/id2671774?mt=11&uo=4", "collectionViewUrl":"https://itunes.apple.com/us/audiobook/hard-times-unabridged/id325114058?uo=4", "artworkUrl60":"http://is3.mzstatic.com/image/thumb/Music/v4/5f/48/bf/5f48bf3e-2b1d-5c42-4041-dac14ffa5466/source/60x60bb.jpg", "artworkUrl100":"http://is3.mzstatic.com/image/thumb/Music/v4/5f/48/bf/5f48bf3e-2b1d-5c42-4041-dac14ffa5466/source/100x100bb.jpg", "collectionPrice":6.95, "collectionExplicitness":"notExplicit", "trackCount":1, "copyright":"℗ © 2009 RNIB", "country":"USA", "currency":"USD", "releaseDate":"2009-07-31T07:00:00Z", "primaryGenreName":"Classics", "previewUrl":"http://a137.phobos.apple.com/us/r30/Music7/v4/a2/8f/b3/a28fb310-1032-97ce-9bb7-6083feafcb7c/mzaf_3284383172530399448.plus.aac.p.m4a"}]
+  }
+}
