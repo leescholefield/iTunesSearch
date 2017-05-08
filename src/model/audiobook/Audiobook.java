@@ -1,11 +1,13 @@
 package model.audiobook;
 
+import model.Item;
+
 import java.math.BigDecimal;
 
 /**
  *
  */
-public class Audiobook {
+public class Audiobook extends Item {
 
     private String artistName;
     private String collectionName;
