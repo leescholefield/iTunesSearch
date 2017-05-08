@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 /**
  * Base class containing all attributes shared by 'Track' subclasses
  */
-public class Track extends Item {
+abstract class Track extends Item {
 
     private String artistName;
     private String trackName;

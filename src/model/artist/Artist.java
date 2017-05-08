@@ -17,6 +17,10 @@ public class Artist extends Item {
     private String primaryGenreName;
     private long primaryGenreId;
 
+    @Override
+    protected ItemType getType() {
+        return ItemType.ARTIST;
+    }
 
     public String getArtistLinkUrl() {
         return artistLinkUrl;

@@ -3,7 +3,7 @@ package model.track;
 /**
  *
  */
-class Audio extends Track {
+abstract class Audio extends Track {
     private long artistId;
     private long collectionId;
 

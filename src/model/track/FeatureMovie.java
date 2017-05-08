@@ -1,5 +1,7 @@
 package model.track;
 
+import model.Item;
+
 import java.math.BigDecimal;
 
 /**
@@ -19,6 +21,11 @@ public class FeatureMovie extends Track {
     private String shortDescription;
     private String longDescription;
     private boolean hasITunesExtras;
+
+    @Override
+    protected ItemType getType() {
+        return ItemType.FEATURE_MOVIE;
+    }
 
     public String getContentAdvisoryRating() {
         return contentAdvisoryRating;

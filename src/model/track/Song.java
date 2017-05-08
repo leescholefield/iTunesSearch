@@ -1,5 +1,7 @@
 package model.track;
 
+import model.Item;
+
 /**
  * Represents a song
  */
@@ -10,6 +12,11 @@ public class Song extends Record {
     private String collectionArtistName;
     private long collectionArtistId;
     private String collectionArtistViewUrl;
+
+    @Override
+    protected ItemType getType() {
+        return ItemType.SONG;
+    }
 
     public boolean isStreamable() {
         return isStreamable;
