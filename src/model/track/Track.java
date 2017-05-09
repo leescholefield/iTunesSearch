@@ -64,11 +64,11 @@ abstract class Track extends Item {
         return trackId;
     }
 
-    public boolean isTrackExplicitness() {
+    public boolean isTrackExplicit() {
         return trackExplicitness;
     }
 
-    public boolean isCollectionExplicitness() {
+    public boolean isCollectionExplicit() {
         return collectionExplicitness;
     }
 
