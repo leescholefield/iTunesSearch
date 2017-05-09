@@ -14,4 +14,23 @@ abstract class Record extends Audio {
 
     private long trackTimeMillis;
 
+    public String getPreviewUrl() {
+        return previewUrl;
+    }
+
+    public int getDiscCount() {
+        return discCount;
+    }
+
+    public int getDiscNumber() {
+        return discNumber;
+    }
+
+    public int getTrackNumber() {
+        return trackNumber;
+    }
+
+    public long getTrackTimeInMillis() {
+        return trackTimeMillis;
+    }
 }
