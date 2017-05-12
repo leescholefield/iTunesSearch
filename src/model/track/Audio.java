@@ -43,4 +43,24 @@ abstract class Audio extends Track {
     public int getTrackCount() {
         return trackCount;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this)
+          return true;
+
+        if (!(o instanceof Audio)){
+            return false;
+        }
+
+        Audio other = (Audio)o;
+
+        return super.equals(o) && other.collectionId == collectionId
+                && other.artistId == artistId
+                && other.collectionCensoredName.equals(collectionCensoredName)
+                && other.collectionName.equals(collectionName)
+                && other.artistViewUrl.equals(artistViewUrl)
+                && other.collectionViewUrl.equals(collectionViewUrl)
+                && other.trackCount == trackCount;
+    }
 }

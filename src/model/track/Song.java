@@ -33,4 +33,19 @@ public class Song extends Record {
     public String getCollectionArtistViewUrl() {
         return collectionArtistViewUrl;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if(!(o instanceof Song))
+            return false;
+
+        Song other = (Song)o;
+
+        return super.equals(o) && other.isStreamable == isStreamable
+                && (other.collectionArtistName == null || other.collectionArtistName.equals(collectionArtistName))
+                && other.collectionArtistId == collectionArtistId
+                && (other.collectionArtistName == null || other.collectionArtistViewUrl.equals(collectionArtistViewUrl));
+    }
 }

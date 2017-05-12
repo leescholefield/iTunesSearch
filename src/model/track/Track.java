@@ -31,6 +31,7 @@ abstract class Track extends Item {
     private BigDecimal collectionPrice;
     private String country;
 
+
     @Override
     public String toString(){
         return trackName + " by " + artistName;
@@ -102,5 +103,33 @@ abstract class Track extends Item {
 
     public String getCountry() {
         return country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this)
+            return true;
+        if(!(o instanceof Song))
+            return false;
+
+        Track other = (Track)o;
+
+        return other.artistName.equals(artistName)
+                && other.trackName.equals(trackName)
+                && other.trackCensoredName.equals(trackCensoredName)
+                && other.primaryGenreName.equals(primaryGenreName)
+                && other.trackViewUrl.equals(trackViewUrl)
+                && other.trackId == trackId
+                && other.trackExplicitness == trackExplicitness
+                && other.collectionExplicitness == collectionExplicitness
+                && other.artworkUrl30.equals(artworkUrl30)
+                && other.artworkUrl60.equals(artworkUrl60)
+                && other.artworkUrl100.equals(artworkUrl100)
+                && other.releaseDate.equals(releaseDate)
+                && other.currency.equals(currency)
+                && other.trackPrice.equals(trackPrice)
+                && other.collectionPrice.equals(collectionPrice)
+                && other.country.equals(country);
+
     }
 }
