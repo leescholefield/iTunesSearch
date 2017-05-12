@@ -1,6 +1,6 @@
-package model;
+package parse;
 
-import com.sun.javafx.UnmodifiableArrayList;
+import model.Item;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,11 +11,11 @@ import java.util.function.Consumer;
 /**
  * Wrapper around a List of Items.
  */
-class ResultList {
+public final class ResultList<T extends Item> {
 
-    private List<Item> resultList;
+    private List<T> resultList;
 
-    ResultList(List<Item> results){
+    ResultList(List<T> results){
         this.resultList = results;
     }
 
@@ -39,21 +39,21 @@ class ResultList {
      * @param modelInstance Type of model to cast the result to.
      * @return a list of models of type T, or an empty list if no results were found.
      */
-    public <T extends Item> List<T> getResultsOfType(Item.ItemType itemType, Class<T> modelInstance){
-        List<T> returnList = new ArrayList<>();
+    public <T2 extends T> ResultList<T2> getResultsOfType(Item.ItemType itemType, Class<T2> modelInstance){
+        List<T2> returnList = new ArrayList<>();
 
         for(Item i : resultList){
             if(i.getType() == itemType){
                 returnList.add(modelInstance.cast(i));
             }
         }
-        return returnList;
+        return new ResultList<T2>(returnList);
     }
 
     /**
      * Returns an unmodifiable list containing all the items in resultList.
      */
-    public List<Item> getResultList(){
+    public List<T> getResultList(){
         return Collections.unmodifiableList(resultList);
     }
 
@@ -63,16 +63,16 @@ class ResultList {
      *
      * @throws UnsupportedOperationException if the remove() is called.
      */
-    public Iterator<Item> iterator(){
-        return new Iterator<Item>() {
-            Iterator<Item> innerIter = resultList.iterator();
+    public Iterator<T> iterator(){
+        return new Iterator<T>() {
+            Iterator<T> innerIter = resultList.iterator();
             @Override
             public boolean hasNext() {
                 return innerIter.hasNext();
             }
 
             @Override
-            public Item next() {
+            public T next() {
                 return innerIter.next();
             }
 
@@ -82,7 +82,7 @@ class ResultList {
             }
 
             @Override
-            public void forEachRemaining(Consumer<? super Item> action) {
+            public void forEachRemaining(Consumer<? super T> action) {
                 innerIter.forEachRemaining(action);
             }
         };
