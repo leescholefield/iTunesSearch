@@ -19,11 +19,39 @@ public class SongDeserializer {
     private static Song model = null;
 
     @BeforeClass
-    public static void getModel() throws Exception{
+    public static void setModel() throws Exception{
+        model = getModel();
+    }
+
+    private static Song getModel() throws Exception{
         ItemDeserializer deserializer = new ItemDeserializer();
         JsonElement elem = getJsonElement("song");
         List<Item> response = deserializer.deserialize(elem, Item.class, null);
         model = (Song)response.get(0);
+        return model;
+    }
+
+    private Song newModel() throws Exception{
+        ItemDeserializer deserializer = new ItemDeserializer();
+        JsonElement elem = getJsonElement("song");
+        List<Item> response = deserializer.deserialize(elem, Item.class, null);
+        model = (Song)response.get(0);
+        return model;
+    }
+
+    /**
+     * Tests the Songs equals() method. Note, since gson seems to cache references to deserialized objects the equals
+     * method will return true if they refer to the same memory location ('other == this') and not go on to test the
+     * fields.
+     *
+     * I've tried it with the removed reference comparison and it will still return true, but I need to find a way
+     * to create a new instance of Song without adding an unnecessary copy constructor or method.
+     */
+    @Test
+    public void songEquals() throws Exception {
+        Song other = newModel();
+
+        assertEquals(true, model.equals(other));
     }
 
     /**
