@@ -1,5 +1,6 @@
 package request;
 
+import javax.print.attribute.standard.Media;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,26 @@ public class RequestBuilder {
 
     /* Creates a {@link Request} instance. */
     public Request newRequest(){
+        return new RequestImpl(paramMap);
+    }
+
+    /**
+     * Creates a new {@link Request} instance for a Podcast request. If the caller has already set the MEDIA and
+     * ENTITY this will override the previously set values.
+     */
+    public Request newPodcastRequest(){
+        this.paramMap.put(Request.Keys.MEDIA, "podcast");
+        this.paramMap.put(Request.Keys.ENTITY, "podcast");
+        return new RequestImpl(paramMap);
+    }
+
+    /**
+     * Creates a new {@link Request} instance for a Song request. If the caller has already set the MEDIA and
+     * ENTITY this will override the previously set values.
+     */
+    public Request newSongRequest(){
+        this.paramMap.put(Request.Keys.MEDIA, "music");
+        this.paramMap.put(Request.Keys.ENTITY, "song");
         return new RequestImpl(paramMap);
     }
 
