@@ -1,10 +1,10 @@
 package request;
 
-import javax.print.attribute.standard.Media;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Utility class for constructing a new Request instance.
  */
 public class RequestBuilder {
 
@@ -40,25 +40,42 @@ public class RequestBuilder {
         this.paramMap.put(RequestImpl.Keys.TERM, term);
     }
 
-    /**
-     * Constructor methods.
-     */
 
+    /**
+     * Sets the ISO country code for the country Store you want to search in.
+     *
+     * See <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO codes</a> for a list of valid codes.
+     */
     public RequestBuilder country(String country){
         this.paramMap.put(RequestImpl.Keys.COUNTRY, country);
         return this;
     }
 
+    /**
+     * Sets the media type you want to search for.
+     *
+     * Valid media types: movie, podcast, music, musicVideo, audiobook, shortFilm, tvShow,
+     *  software, ebook, all
+     */
     public RequestBuilder media(String mediaType){
         this.paramMap.put(RequestImpl.Keys.MEDIA, mediaType);
         return this;
     }
 
+    /**
+     * Sets the entity associated with the media type.
+     *
+     * See <a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/">
+     *     Itunes Search API</a> for a list of valid values.
+     */
     public RequestBuilder entity(String entity){
         this.paramMap.put(RequestImpl.Keys.ENTITY, entity);
         return this;
     }
 
+    /**
+     * Specifies the attribute you want to search for in the stores, relative to the specified media type.
+     */
     public RequestBuilder attribute(String attribute){
         this.paramMap.put(RequestImpl.Keys.ATTRIBUTE, attribute);
         return this;
@@ -76,6 +93,11 @@ public class RequestBuilder {
         throw new IllegalArgumentException("limit must be between 0 and 200");
     }
 
+    /**
+     * The language you want to use when returning search results from the iTunes Store.
+     *
+     * Note, the only valid values are "en_us" and "ja_jp".
+     */
     public RequestBuilder language(String language){
         this.paramMap.put(RequestImpl.Keys.LANG, language);
         return this;
@@ -83,6 +105,7 @@ public class RequestBuilder {
 
     /**
      * The results version to be returned by the itunes request.
+     *
      * @param version either 1 or 2
      */
     public RequestBuilder version(int version){
@@ -112,5 +135,5 @@ public class RequestBuilder {
         this.paramMap.put(Request.Keys.OFFSET, String.valueOf(offset));
         return this;
     }
-} // end of factory class
+}
 
