@@ -49,4 +49,22 @@ public class Artist extends Item {
     public long getAmgArtistId() {
         return amgArtistId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Artist))
+            return false;
+
+        Artist other = (Artist)o;
+
+        return other.artistLinkUrl.equals(artistLinkUrl)
+                && other.artistName.equals(artistName)
+                && other.artistType.equals(artistType)
+                && other.artistId == artistId
+                && other.amgArtistId == amgArtistId
+                && other.primaryGenreName.equals(primaryGenreName)
+                && other.primaryGenreId == primaryGenreId;
+    }
 }
