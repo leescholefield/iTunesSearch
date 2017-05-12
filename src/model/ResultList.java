@@ -1,7 +1,12 @@
 package model;
 
+import com.sun.javafx.UnmodifiableArrayList;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Wrapper around a List of Items.
@@ -15,14 +20,14 @@ class ResultList {
     }
 
     /**
-     * Returns the size of the resultList.
+     * Returns the size of the resultList. Delegates to the resultList.size() method.
      */
     public int size() {
         return resultList.size();
     }
 
     /**
-     * Returns true if the resultList contains no elements.
+     * Returns true if the resultList contains no elements. Delegates to the resultList.isEmpty() method.
      */
     public boolean isEmpty() {
         return resultList.isEmpty();
@@ -43,6 +48,44 @@ class ResultList {
             }
         }
         return returnList;
+    }
+
+    /**
+     * Returns an unmodifiable list containing all the items in resultList.
+     */
+    public List<Item> getResultList(){
+        return Collections.unmodifiableList(resultList);
+    }
+
+    /**
+     * Returns a new Iterator<Item> object. This delegates to the Iterator obtained by calling resultList.iterator(),
+     * however this one does not support the remove() method.
+     *
+     * @throws UnsupportedOperationException if the remove() is called.
+     */
+    public Iterator<Item> iterator(){
+        return new Iterator<Item>() {
+            Iterator<Item> innerIter = resultList.iterator();
+            @Override
+            public boolean hasNext() {
+                return innerIter.hasNext();
+            }
+
+            @Override
+            public Item next() {
+                return innerIter.next();
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException("Cannot modify the resultList");
+            }
+
+            @Override
+            public void forEachRemaining(Consumer<? super Item> action) {
+                innerIter.forEachRemaining(action);
+            }
+        };
     }
 
 }
