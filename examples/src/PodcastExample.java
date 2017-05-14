@@ -21,8 +21,8 @@ public class PodcastExample {
         Request request = new RequestBuilder(term).newPodcastRequest();
         Response response = request.sendRequest();
 
-        ResultList<Item> resultList = new Parser().parse(response.responseBody());
-        ResultList<Podcast> podcastList = resultList.getResultsOfType(Item.ItemType.PODCAST, Podcast.class);
+        ResultList<Podcast> podcastList = new Parser().parseToModel(response,
+                Item.ItemType.PODCAST, Podcast.class);
 
         return podcastList;
     }
