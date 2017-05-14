@@ -34,9 +34,13 @@ public final class ResultList<T extends Item> {
     }
 
     /**
-     * Returns a List of models from the resultList of the given type.
+     * Searches the resultList for items that match the given ItemType then casts them to the given modelInstance.
+     *
+     * Note, itemType and modelInstance must be subclasses of T.
+     *
      * @param itemType ItemType to search the list for.
      * @param modelInstance Type of model to cast the result to.
+     * @param <T2> a subclass of Item, and a subclass of T
      * @return a list of models of type T, or an empty list if no results were found.
      */
     public <T2 extends T> ResultList<T2> getResultsOfType(Item.ItemType itemType, Class<T2> modelInstance){
@@ -51,14 +55,14 @@ public final class ResultList<T extends Item> {
     }
 
     /**
-     * Returns an unmodifiable list containing all the items in resultList.
+     * Returns resultList as an UnmodifiableList.
      */
     public List<T> getResultList(){
         return Collections.unmodifiableList(resultList);
     }
 
     /**
-     * Returns a new Iterator<Item> object. This delegates to the Iterator obtained by calling resultList.iterator(),
+     * Returns a new Iterator<T> object. This delegates to the Iterator obtained by calling resultList.iterator(),
      * however this one does not support the remove() method.
      *
      * @throws UnsupportedOperationException if the remove() is called.
