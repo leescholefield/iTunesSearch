@@ -12,12 +12,12 @@ import java.util.List;
 
 
 /**
- * Uses Gson to parse a Response into a ResultList.
+ * Uses Gson to parse a Response into a {@link ResultList}
  */
 public class Parser {
 
     /**
-     * Parses the given JSON string into a ResultList of Item instances.
+     * Parses the given JSON string into a {@link ResultList<Item>}.
      *
      * @param jsonString json string to parse.
      * @return ResultList of type Item.
@@ -31,7 +31,7 @@ public class Parser {
     }
 
     /**
-     * Parses the given Response instance into a ResultList of Item instances.
+     * Parses the given Response instance into a {@link ResultList<Item>}.
      *
      * @param response Response instance.
      * @return ResultList of type Item.
@@ -44,13 +44,13 @@ public class Parser {
     }
 
     /**
-     * Utility method for automatically parsing a JSON string into Item subclasses.
+     * Utility method for automatically parsing a JSON string into {@link Item} subclasses.
      *
      * @param jsonString json string to parse.
-     * @param type ItemType to search for.
+     * @param type {@link model.Item.ItemType} to search for.
      * @param model Item subclass to cast to.
      * @param <T> model to cast Item instances to.
-     * @return a new ResultList of type T.
+     * @return a new {@link ResultList<T>}
      */
     public <T extends Item> ResultList<T> parseToModel(String jsonString, Item.ItemType type, Class<T> model){
         ResultList<Item> itemResults = parse(jsonString);
@@ -58,13 +58,13 @@ public class Parser {
     }
 
     /**
-     * Utility method for automatically parsing a JSON string into Item subclasses.
+     * Utility method for automatically parsing a JSON string into {@link Item} subclasses.
      *
      * @param response Response instance.
-     * @param type itemType to search for.
+     * @param type {@link model.Item.ItemType} to search for.
      * @param model Item subclass to cast to.
      * @param <T> model to cast Item instances to.
-     * @return a new ResultList of type T.
+     * @return a new {@link ResultList<T>}
      */
     public <T extends Item> ResultList<T> parseToModel(Response response, Item.ItemType type, Class<T> model){
         ResultList<Item> itemResults = parse(response);
