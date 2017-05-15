@@ -11,7 +11,7 @@ import java.util.Map;
  */
 class RequestImpl implements Request {
 
-    private final Map<Keys, String> paramMap;
+    private final Map<String, String> paramMap;
     private int currentOffset = 0;
 
     /**
@@ -20,7 +20,7 @@ class RequestImpl implements Request {
      *
      * Note, this makes a copy the requestParams map.
      */
-    RequestImpl(Map<Keys, String> requestParams){
+    RequestImpl(Map<String, String> requestParams){
         paramMap = new HashMap<>(requestParams);
     }
 
@@ -35,14 +35,14 @@ class RequestImpl implements Request {
     /**
      * Package-private so can be tested.
      */
-    static String createUrl(Map<Keys, String> paramMap, int offset){
+    static String createUrl(Map<String, String> paramMap, int offset){
         final String urlBase = "https://itunes.apple.com/search?";
 
         StringBuilder builder = new StringBuilder();
         builder.append(urlBase);
 
-        for (Map.Entry<Keys, String> entry : paramMap.entrySet()){
-            builder.append("&" ).append(entry.getKey().toString()).append("=").append(entry.getValue());
+        for (Map.Entry<String, String> entry : paramMap.entrySet()){
+            builder.append("&" ).append(entry.getKey()).append("=").append(entry.getValue());
         }
 
         builder.append(createOffsetParam(offset));
@@ -65,7 +65,7 @@ class RequestImpl implements Request {
     /**
      * Returns an UnmodifiableMap.
      */
-    public Map<Keys, String> getParamMap(){
+    public Map<String, String> getParamMap(){
         return Collections.unmodifiableMap(paramMap);
     }
 
@@ -86,7 +86,7 @@ class RequestImpl implements Request {
     }
 
     private static String createOffsetParam(int offset){
-        return "&" + Keys.OFFSET.toString() + "=" + String.valueOf(offset);
+        return "&" + KeyVals.Keys.OFFSET + "=" + String.valueOf(offset);
     }
 
     @Override
