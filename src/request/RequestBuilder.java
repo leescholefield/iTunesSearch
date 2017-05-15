@@ -5,6 +5,19 @@ import java.util.Map;
 
 /**
  * Utility class for constructing a new Request instance.
+ * <p>
+ * The only value required to construct a new Request is the "term" (string value to search the store for). If
+ * the other values are not set the iTunes Search server will use their default values. These are:
+ *      <ul>
+ *          <li><b>Media</b> : "all".</li>
+ *          <li><b>Entity</b> : the track entity associated with the specified Media type. E.g. if Media is
+ *          "music" the Entity will be "musicTrack".</li>
+ *          <li><b>Country</b> : "US".</li>
+ *          <li><b>Limit</b> : 50.</li>
+ *          <li><b>Explicit</b> : "Yes"</li>
+ *      </ul>
+ * <p>
+ * Note these values are defined by iTunes and they could change.
  */
 public class RequestBuilder {
 
@@ -19,7 +32,7 @@ public class RequestBuilder {
      * Creates a new {@link Request} instance for a Podcast request. If the caller has already set the MEDIA and
      * ENTITY this will override the previously set values.
      */
-    public Request newPodcastRequest(){
+    public Request newPodcastRequest() {
         this.paramMap.put(Request.Keys.MEDIA, "podcast");
         this.paramMap.put(Request.Keys.ENTITY, "podcast");
         return new RequestImpl(paramMap);
@@ -29,9 +42,39 @@ public class RequestBuilder {
      * Creates a new {@link Request} instance for a Song request. If the caller has already set the MEDIA and
      * ENTITY this will override the previously set values.
      */
-    public Request newSongRequest(){
+    public Request newSongRequest() {
         this.paramMap.put(Request.Keys.MEDIA, "music");
         this.paramMap.put(Request.Keys.ENTITY, "song");
+        return new RequestImpl(paramMap);
+    }
+
+    /**
+     * Creates a new {@link Request} instance for an Album request. If the caller has already set the MEDIA and
+     * ENTITY this will override the previously set values.
+     */
+    public Request newAlbumRequest() {
+        this.paramMap.put(Request.Keys.MEDIA, "music");
+        this.paramMap.put(Request.Keys.ENTITY, "album");
+        return new RequestImpl(paramMap);
+    }
+
+    /**
+     * Creates a new {@link Request} instance for a Movie request. If the caller has already set the MEDIA and
+     * ENTITY this will override the previously set values.
+     */
+    public Request newMovieRequest() {
+        this.paramMap.put(Request.Keys.MEDIA, "movie");
+        this.paramMap.put(Request.Keys.ENTITY, "movie");
+        return new RequestImpl(paramMap);
+    }
+
+    /**
+     * Creates a new {@link Request} instance for a Music Artist request. If the caller has already set the MEDIA
+     * and ENTITY this will override the previously set values.
+     */
+    public Request newMusicArtistRequest() {
+        this.paramMap.put(Request.Keys.MEDIA, "music");
+        this.paramMap.put(Request.Keys.ENTITY, "musicArtist");
         return new RequestImpl(paramMap);
     }
 
