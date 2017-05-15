@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class RequestBuilder {
 
-    private Map<RequestImpl.Keys, String> paramMap = new HashMap<>();
+    private Map<String, String> paramMap = new HashMap<>();
 
     /* Creates a {@link Request} instance. */
     public Request newRequest(){
@@ -33,8 +33,8 @@ public class RequestBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newPodcastRequest() {
-        this.paramMap.put(Request.Keys.MEDIA, "podcast");
-        this.paramMap.put(Request.Keys.ENTITY, "podcast");
+        this.paramMap.put(KeyVals.Keys.MEDIA, KeyVals.Entity.Podcast.PODCAST);
+        this.paramMap.put(KeyVals.Keys.ENTITY, "podcast");
         return new RequestImpl(paramMap);
     }
 
@@ -43,8 +43,8 @@ public class RequestBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newSongRequest() {
-        this.paramMap.put(Request.Keys.MEDIA, "music");
-        this.paramMap.put(Request.Keys.ENTITY, "song");
+        this.paramMap.put(KeyVals.Keys.MEDIA, "music");
+        this.paramMap.put(KeyVals.Keys.ENTITY, "song");
         return new RequestImpl(paramMap);
     }
 
@@ -53,8 +53,8 @@ public class RequestBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newAlbumRequest() {
-        this.paramMap.put(Request.Keys.MEDIA, "music");
-        this.paramMap.put(Request.Keys.ENTITY, "album");
+        this.paramMap.put(KeyVals.Keys.MEDIA, "music");
+        this.paramMap.put(KeyVals.Keys.ENTITY, "album");
         return new RequestImpl(paramMap);
     }
 
@@ -63,8 +63,8 @@ public class RequestBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newMovieRequest() {
-        this.paramMap.put(Request.Keys.MEDIA, "movie");
-        this.paramMap.put(Request.Keys.ENTITY, "movie");
+        this.paramMap.put(KeyVals.Keys.MEDIA, "movie");
+        this.paramMap.put(KeyVals.Keys.ENTITY, "movie");
         return new RequestImpl(paramMap);
     }
 
@@ -73,14 +73,14 @@ public class RequestBuilder {
      * and ENTITY this will override the previously set values.
      */
     public Request newMusicArtistRequest() {
-        this.paramMap.put(Request.Keys.MEDIA, "music");
-        this.paramMap.put(Request.Keys.ENTITY, "musicArtist");
+        this.paramMap.put(KeyVals.Keys.MEDIA, "music");
+        this.paramMap.put(KeyVals.Keys.ENTITY, "musicArtist");
         return new RequestImpl(paramMap);
     }
 
     /* term is the only required value for a RequestImpl */
     public RequestBuilder(String term){
-        this.paramMap.put(RequestImpl.Keys.TERM, term);
+        this.paramMap.put(KeyVals.Keys.TERM, term);
     }
 
 
@@ -90,7 +90,7 @@ public class RequestBuilder {
      * See <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO codes</a> for a list of valid codes.
      */
     public RequestBuilder country(String country){
-        this.paramMap.put(RequestImpl.Keys.COUNTRY, country);
+        this.paramMap.put(KeyVals.Keys.COUNTRY, country);
         return this;
     }
 
@@ -101,7 +101,7 @@ public class RequestBuilder {
      *  software, ebook, all
      */
     public RequestBuilder media(String mediaType){
-        this.paramMap.put(RequestImpl.Keys.MEDIA, mediaType);
+        this.paramMap.put(KeyVals.Keys.MEDIA, mediaType);
         return this;
     }
 
@@ -112,7 +112,7 @@ public class RequestBuilder {
      *     Itunes Search API</a> for a list of valid values.
      */
     public RequestBuilder entity(String entity){
-        this.paramMap.put(RequestImpl.Keys.ENTITY, entity);
+        this.paramMap.put(KeyVals.Keys.ENTITY, entity);
         return this;
     }
 
@@ -120,7 +120,7 @@ public class RequestBuilder {
      * Specifies the attribute you want to search for in the stores, relative to the specified media type.
      */
     public RequestBuilder attribute(String attribute){
-        this.paramMap.put(RequestImpl.Keys.ATTRIBUTE, attribute);
+        this.paramMap.put(KeyVals.Keys.ATTRIBUTE, attribute);
         return this;
     }
 
@@ -130,7 +130,7 @@ public class RequestBuilder {
      */
     public RequestBuilder limit(int limit){
         if(limit >= 0 && limit <= 200){
-            this.paramMap.put(RequestImpl.Keys.LIMIT, String.valueOf(limit));
+            this.paramMap.put(KeyVals.Keys.LIMIT, String.valueOf(limit));
             return this;
         }
         throw new IllegalArgumentException("limit must be between 0 and 200");
@@ -142,21 +142,8 @@ public class RequestBuilder {
      * Note, the only valid values are "en_us" and "ja_jp".
      */
     public RequestBuilder language(String language){
-        this.paramMap.put(RequestImpl.Keys.LANG, language);
+        this.paramMap.put(KeyVals.Keys.LANG, language);
         return this;
-    }
-
-    /**
-     * The results version to be returned by the itunes request.
-     *
-     * @param version either 1 or 2
-     */
-    public RequestBuilder version(int version){
-        if(version == 1 || version == 2){
-            this.paramMap.put(RequestImpl.Keys.VERSION, String.valueOf(version));
-            return this;
-        }
-        throw new IllegalArgumentException("version must either be 1 or 2");
     }
 
     /**
@@ -167,7 +154,7 @@ public class RequestBuilder {
         if(!explicit){
             val = "No";
         }
-        this.paramMap.put(RequestImpl.Keys.EXPLICIT, val);
+        this.paramMap.put(KeyVals.Keys.EXPLICIT, val);
         return this;
     }
 
@@ -175,7 +162,7 @@ public class RequestBuilder {
      * Used for Pagination. The default is 0.
      */
     public RequestBuilder offset(int offset){
-        this.paramMap.put(Request.Keys.OFFSET, String.valueOf(offset));
+        this.paramMap.put(KeyVals.Keys.OFFSET, String.valueOf(offset));
         return this;
     }
 }
