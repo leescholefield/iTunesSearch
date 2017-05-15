@@ -12,12 +12,12 @@ import static org.junit.Assert.*;
  */
 public class RequestImplTest {
 
-    private static final Map<Request.Keys, String> testParam = new LinkedHashMap<>();
+    private static final Map<String, String> testParam = new LinkedHashMap<>();
     static{
-        testParam.put(Request.Keys.TERM, "history");
-        testParam.put(Request.Keys.MEDIA, "podcast");
-        testParam.put(Request.Keys.LIMIT, "150");
-        testParam.put(Request.Keys.EXPLICIT, "No");
+        testParam.put(KeyVals.Keys.TERM, "history");
+        testParam.put(KeyVals.Keys.MEDIA, "podcast");
+        testParam.put(KeyVals.Keys.LIMIT, "150");
+        testParam.put(KeyVals.Keys.EXPLICIT, "No");
     }
 
 
