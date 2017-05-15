@@ -7,25 +7,6 @@ import java.util.Map;
  */
 public interface Request {
 
-    /* Valid keys for the request url. */
-    enum Keys {
-        TERM,
-        COUNTRY,
-        MEDIA,
-        ENTITY,
-        ATTRIBUTE,
-        LIMIT,
-        LANG,
-        VERSION,
-        EXPLICIT,
-        OFFSET;
-
-        @Override
-        public String toString() {
-            return super.toString().toLowerCase();
-        }
-    }
-
     /**
      * Returns a String url by combining the user specified url parameters and the base iTunes Search url
      * ("https://itunes.apple.com/search?").
@@ -55,7 +36,7 @@ public interface Request {
     /**
      * Returns the parameter map containing the
      */
-    Map<Keys, String> getParamMap();
+    Map<String, String> getParamMap();
 
     /**
      * Returns the current offset.
