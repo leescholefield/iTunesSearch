@@ -26,30 +26,36 @@ public class ItemDeserializer implements JsonDeserializer<List<Item>> {
         Gson gson = new Gson();
 
         for (JsonElement element : resultsArray){
-            String wrapperType = element.getAsJsonObject().get("wrapperType").getAsString();
+            JsonObject elementObject = element.getAsJsonObject();
+            String wrapperType = elementObject.get("wrapperType").getAsString();
             Class<? extends Item> c = null;
 
-            switch(wrapperType){
+            switch(wrapperType) {
 
                 case "track":
-                    String kind = element.getAsJsonObject().get("kind").getAsString();
-                    switch(kind){
+                    String kind = elementObject.get("kind").getAsString();
+                    switch(kind) {
                         case "song":
                             c = Song.class;
                             break;
+
                         case "music-video":
                             c = MusicVideo.class;
                             break;
+
                         case "feature-movie":
                             c = FeatureMovie.class;
                             break;
+
                         case "podcast":
                             c = Podcast.class;
                     }
                     break;
+
                 case "artist":
                     c = Artist.class;
                     break;
+
                 case "audiobook":
                     c = Audiobook.class;
                     break;
