@@ -4,9 +4,9 @@ package request;
  * Utility class containing static Strings for the MEDIA and ENTITY parameters, and valid Keys.
  * <p>
  * The use of inner classes is to make the calling code easier to read. For example, to set the Entity to albums
- * you would use {@code String entity = ItunesParams.Entity.Music.ALBUM;}.
+ * you would use {@code String entity = KeyVals.Entity.Music.ALBUM;}.
  */
-public abstract class ItunesParams {
+public abstract class KeyVals {
 
     /**
      * List of valid parameter keys.
@@ -23,6 +23,7 @@ public abstract class ItunesParams {
         public static final String LIMIT = "limit";
         public static final String LANG = "lang";
         public static final String EXPLICIT = "explicit";
+        public static final String OFFSET = "offset";
     }
 
     /**
