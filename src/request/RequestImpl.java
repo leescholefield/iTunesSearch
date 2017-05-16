@@ -7,7 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents an http RequestImpl to the iTunes Search Api.
+ * A simple implementation of the {@link Request} interface. The primary responsibility of this class is to
+ * generate the Url that will be used to send the Http request.
+ * <p>
+ * It also has convenience methods for sending an Http request, utilizing the {@link SimpleHttpRequest} class.
+ * <p>
+ * A note on the offset: the offset is the number of results iTunes should ignore when making a request. To
+ * generate the offset, this class will add the LIMIT value from the paramMap, or 50 (iTunes default) if it
+ * is not set.
  */
 class RequestImpl implements Request {
 
@@ -51,15 +58,9 @@ class RequestImpl implements Request {
     }
 
     @Override
-    public Response sendRequest(){
+    public Response sendRequest() throws IOException {
         SimpleHttpRequest req = new SimpleHttpRequest();
-        try{
-            return req.sendRequest(this);
-        } catch(IOException e){
-
-        }
-        return null;
-
+        return req.sendRequest(this);
     }
 
     /**
@@ -71,13 +72,22 @@ class RequestImpl implements Request {
 
     @Override
     public String nextPageUrl(){
-        currentOffset++;
+        addLimitToOffset();
         return createUrl();
     }
 
     public Request nextPageRequest(){
-        currentOffset++;
+        addLimitToOffset();
         return this;
+    }
+
+    /**
+     * Adds the value for limit (found in the paramMap) to the current offset. If limit is not set it will
+     * use the iTunes defined default of 50.
+     */
+    private void addLimitToOffset(){
+        int limit = Integer.parseInt(paramMap.getOrDefault(KeyVals.Keys.LIMIT, "50"));
+        currentOffset = currentOffset + limit;
     }
 
     @Override
