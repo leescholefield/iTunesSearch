@@ -8,12 +8,13 @@ inheritance. Consequently, some relationships between classes may be unclear. Fo
 
 This uses the built in SimpleHttpRequest to handle sending the request.
 
-''' java
+``` java
+
     Request request = new RequestBuilder("creedence").limit(10).country("GB").newAlbumRequest();
 
     Response response = request.sendRequest();
 
     ResultList<Album> albums = new Parser().parseToModel(response, Item.ItemType.ALBUM, Album.class);
-'''
+```
 
 
