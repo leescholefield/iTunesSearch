@@ -1,5 +1,7 @@
 package request;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,7 +82,13 @@ public class RequestBuilder {
 
     /* term is the only required value for a RequestImpl */
     public RequestBuilder(String term){
-        this.paramMap.put(KeyVals.Keys.TERM, term);
+        String sanInput = null;
+        try {
+            sanInput = URLEncoder.encode(term, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        this.paramMap.put(KeyVals.Keys.TERM, sanInput);
     }
 
 
