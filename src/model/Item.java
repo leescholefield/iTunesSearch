@@ -12,7 +12,8 @@ public abstract class Item {
         PODCAST,
         FEATURE_MOVIE,
         ARTIST,
-        AUDIOBOOK
+        AUDIOBOOK,
+        ALBUM
     }
 
     public abstract ItemType getType();

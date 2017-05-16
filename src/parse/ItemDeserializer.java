@@ -4,6 +4,7 @@ import com.google.gson.*;
 import model.Item;
 import model.artist.Artist;
 import model.audiobook.Audiobook;
+import model.collection.Album;
 import model.track.FeatureMovie;
 import model.track.MusicVideo;
 import model.track.Podcast;
@@ -58,6 +59,10 @@ public class ItemDeserializer implements JsonDeserializer<List<Item>> {
 
                 case "audiobook":
                     c = Audiobook.class;
+                    break;
+
+                case "collection":
+                    c = Album.class;
                     break;
             } // end of switch
 
