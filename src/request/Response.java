@@ -1,5 +1,7 @@
 package request;
 
+import java.io.IOException;
+
 /**
  *
  */
@@ -13,7 +15,7 @@ public interface Response {
     /**
      * Convenience method for getting the next page in a Paginated request.
      */
-    Response nextPage();
+    Response nextPage() throws IOException;
 
     /**
      * Returns the http response body as a String.
