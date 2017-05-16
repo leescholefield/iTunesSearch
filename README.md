@@ -10,7 +10,7 @@ This uses the built in SimpleHttpRequest to handle sending the request.
 
 ``` java
 
-    Request request = new RequestBuilder("creedence").limit(10).country("GB").newAlbumRequest();
+    Request request = new RequestBuilder("creedence clearwater revival").limit(10).country("GB").newAlbumRequest();
 
     Response response = request.sendRequest();
 
