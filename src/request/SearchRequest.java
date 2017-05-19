@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A simple implementation of the {@link Request} interface. The primary responsibility of this class is to
- * generate the Url that will be used to send the Http request.
+ * A simple implementation of the {@link Request} interface for making Search requests. The primary
+ * responsibility of this class is to generate the Url that will be used to send the Http request.
  * <p>
  * It also has convenience methods for sending an Http request, utilizing the {@link SimpleHttpRequest} class.
  * <p>
@@ -16,7 +16,7 @@ import java.util.Map;
  * generate the offset, this class will add the LIMIT value from the paramMap, or 50 (iTunes default) if it
  * is not set.
  */
-class RequestImpl implements Request {
+class SearchRequest implements Request {
 
     private final Map<String, String> paramMap;
     private int currentOffset = 0;
@@ -27,7 +27,7 @@ class RequestImpl implements Request {
      *
      * Note, this makes a copy the requestParams map.
      */
-    RequestImpl(Map<String, String> requestParams){
+    SearchRequest(Map<String, String> requestParams){
         paramMap = new HashMap<>(requestParams);
     }
 
@@ -40,6 +40,8 @@ class RequestImpl implements Request {
     }
 
     /**
+     * Appends the key, values and offset in the given map to the base url and returns it.
+     * <p>
      * Package-private so can be tested.
      */
     static String createUrl(Map<String, String> paramMap, int offset){
@@ -57,6 +59,12 @@ class RequestImpl implements Request {
         return builder.toString();
     }
 
+    /**
+     * Utility method for sending an http request.
+     *
+     * @return a {@link Response} object
+     * @throws IOException if their was a network problem.
+     */
     @Override
     public Response sendRequest() throws IOException {
         SimpleHttpRequest req = new SimpleHttpRequest();
@@ -64,21 +72,30 @@ class RequestImpl implements Request {
     }
 
     /**
-     * Returns an UnmodifiableMap.
+     * Returns a String url for the next page.
+     * <p>
+     * See the class documentation for details on how the offset is calculated.
      */
-    public Map<String, String> getParamMap(){
-        return Collections.unmodifiableMap(paramMap);
-    }
-
     @Override
     public String nextPageUrl(){
         addLimitToOffset();
         return createUrl();
     }
 
+    /**
+     * Returns a {@link Request} for the next page. Note, this just adds the limit to current offset and returns the
+     * same instance.
+     */
+    @Override
     public Request nextPageRequest(){
         addLimitToOffset();
         return this;
+    }
+    /**
+     * Returns an UnmodifiableMap.
+     */
+    public Map<String, String> getParamMap(){
+        return Collections.unmodifiableMap(paramMap);
     }
 
     /**
@@ -86,7 +103,7 @@ class RequestImpl implements Request {
      * use the iTunes defined default of 50.
      */
     private void addLimitToOffset(){
-        int limit = Integer.parseInt(paramMap.getOrDefault(KeyVals.Keys.LIMIT, "50"));
+        int limit = Integer.parseInt(paramMap.getOrDefault(KeyVals.SearchKeys.LIMIT, "50"));
         currentOffset = currentOffset + limit;
     }
 
@@ -96,9 +113,14 @@ class RequestImpl implements Request {
     }
 
     private static String createOffsetParam(int offset){
-        return "&" + KeyVals.Keys.OFFSET + "=" + String.valueOf(offset);
+        return "&" + KeyVals.SearchKeys.OFFSET + "=" + String.valueOf(offset);
     }
 
+    /**
+     * The offset is the number of items iTunes will skip when returning the results.
+     *
+     * @return the current offset.
+     */
     @Override
     public int getCurrentOffset() {
         return currentOffset;
