@@ -23,10 +23,9 @@ public class Audiobook extends Item {
     private String currency;
     private BigDecimal collectionPrice;
 
-
     private String releaseDate;
 
-
+    private String artworkUrl30;
     private String artworkUrl60;
     private String artworkUrl100;
 
@@ -91,6 +90,8 @@ public class Audiobook extends Item {
         return releaseDate;
     }
 
+    public String getArtworkUrl30() {return artworkUrl30; }
+
     public String getArtworkUrl60() {
         return artworkUrl60;
     }
@@ -117,5 +118,41 @@ public class Audiobook extends Item {
 
     public String getCountry() {
         return country;
+    }
+
+    @Override
+    public String toString() {
+        return collectionName + " by " + artistName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Audiobook))
+            return false;
+
+        Audiobook other = (Audiobook)o;
+
+        return other.artistName.equals(artistName)
+                && other.collectionName.equals(collectionName)
+                && other.artistViewUrl.equals(artistViewUrl)
+                && other.collectionViewUrl.equals(collectionViewUrl)
+                && other.collectionCensoredName.equals(collectionCensoredName)
+                && other.previewUrl.equals(previewUrl)
+                && other.collectionId == collectionId
+                && other.artistId == artistId
+                && other.amgArtistId == amgArtistId
+                && other.currency.equals(currency)
+                && other.collectionPrice.equals(collectionPrice)
+                && other.releaseDate.equals(releaseDate)
+                && other.artworkUrl60.equals(artworkUrl60)
+                && other.artworkUrl30.equals(artworkUrl30)
+                && other.artworkUrl100.equals(artworkUrl100)
+                && other.trackCount == trackCount
+                && other.collectionExplicitness == collectionExplicitness
+                && other.primaryGenreName.equals(primaryGenreName)
+                && other.copyright.equals(copyright)
+                && other.country.equals(country);
     }
 }
