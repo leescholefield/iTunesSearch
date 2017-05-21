@@ -1,7 +1,7 @@
 package request;
 
 /**
- * Utility class containing static Strings for the MEDIA and ENTITY parameters, and valid Keys.
+ * Utility class containing static Strings for the MEDIA and ENTITY parameters, and valid SearchKeys.
  * <p>
  * The use of inner classes is to make the calling code easier to read. For example, to set the Entity to albums
  * you would use {@code String entity = KeyVals.Entity.Music.ALBUM;}.
@@ -9,21 +9,32 @@ package request;
 public abstract class KeyVals {
 
     /**
-     * List of valid parameter keys.
+     * List of valid parameter keys. This is package-private
      * <p>
      * Note, "callback" and "version", although valid, are not here since this
      * library only supports version 2 and does not support callback at all.
      */
-    public static class Keys {
-        public static final String TERM = "term";
-        public static final String COUNTRY = "country";
-        public static final String MEDIA = "media";
-        public static final String ENTITY = "entity";
-        public static final String ATTRIBUTE = "attribute";
-        public static final String LIMIT = "limit";
-        public static final String LANG = "lang";
-        public static final String EXPLICIT = "explicit";
-        public static final String OFFSET = "offset";
+    static class SearchKeys {
+        static final String TERM = "term";
+        static final String COUNTRY = "country";
+        static final String MEDIA = "media";
+        static final String ENTITY = "entity";
+        static final String ATTRIBUTE = "attribute";
+        static final String LIMIT = "limit";
+        static final String LANG = "lang";
+        static final String EXPLICIT = "explicit";
+        static final String OFFSET = "offset";
+    }
+
+    static class LookupKeys {
+        static final String ITUNES_ID = "id";
+        static final String AMG_ARTIST_ID = "amgArtistId";
+        static final String UPC = "upc";
+        static final String AMG_ALBUM_ID = "amgAlbumId";
+        static final String AMG_VIDEO_ID = "amgVideoId";
+        static final String ISBN = "isbn";
+
+        static final String LIMIT = "limit";
     }
 
     /**

@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
- *  Used by the RequestImpl class as the default way to send a request to the iTunes Search Api.
+ *  Used by the SearchRequest class as the default way to send a request to the iTunes Search Api.
  */
 class SimpleHttpRequest {
 

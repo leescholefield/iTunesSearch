@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Utility class for constructing a new {@link SearchRequest} instance.
- *
+ * Utility class for constructing a new {@link Request} instance.
  * <p>
  * The only value required to construct a new Request is the "term" (string value to search the store for). If
  * the other values are not set the iTunes Search server will use their default values. These are:
@@ -28,7 +27,7 @@ public final class SearchBuilder {
 
     /* Creates a {@link Request} instance. */
     public Request newRequest() {
-        return new SearchRequest(paramMap);
+        return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
     /**
@@ -38,7 +37,7 @@ public final class SearchBuilder {
     public Request newPodcastRequest() {
         this.paramMap.put(KeyVals.SearchKeys.MEDIA, KeyVals.Entity.Podcast.PODCAST);
         this.paramMap.put(KeyVals.SearchKeys.ENTITY, "podcast");
-        return new SearchRequest(paramMap);
+        return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
     /**
@@ -48,7 +47,7 @@ public final class SearchBuilder {
     public Request newSongRequest() {
         this.paramMap.put(KeyVals.SearchKeys.MEDIA, "music");
         this.paramMap.put(KeyVals.SearchKeys.ENTITY, "song");
-        return new SearchRequest(paramMap);
+        return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
     /**
@@ -58,7 +57,7 @@ public final class SearchBuilder {
     public Request newAlbumRequest() {
         this.paramMap.put(KeyVals.SearchKeys.MEDIA, "music");
         this.paramMap.put(KeyVals.SearchKeys.ENTITY, "album");
-        return new SearchRequest(paramMap);
+        return new RequestImpl(paramMap,Request.SEARCH_URL_BASE);
     }
 
     /**
@@ -68,7 +67,7 @@ public final class SearchBuilder {
     public Request newMovieRequest() {
         this.paramMap.put(KeyVals.SearchKeys.MEDIA, "movie");
         this.paramMap.put(KeyVals.SearchKeys.ENTITY, "movie");
-        return new SearchRequest(paramMap);
+        return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
     /**
@@ -78,12 +77,12 @@ public final class SearchBuilder {
     public Request newMusicArtistRequest() {
         this.paramMap.put(KeyVals.SearchKeys.MEDIA, "music");
         this.paramMap.put(KeyVals.SearchKeys.ENTITY, "musicArtist");
-        return new SearchRequest(paramMap);
+        return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
 
     /**
-     * The term is the only required param for constructing a {@link SearchRequest}.
+     * The term is the only required param for constructing a {@link Request}.
      *
      * @param term term to search for.
      */
