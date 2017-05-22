@@ -12,7 +12,17 @@ import java.util.List;
 
 
 /**
- * Uses Gson to parse a Response into a {@link ResultList}
+ * Uses Gson to parse a Response into a {@link ResultList}.
+ *
+ * If you are only interested in results of a specific kind ( {@code model.track.Song} for instance), or you know that the
+ * JSON returned by the iTunes server will only contain results of a specific kind, you can use a {@link #parseToModel}
+ * method, which will automatically cast the results to the {@code model} class.
+ *
+ * <pre>
+ *     {@code
+ *     ResultList<Song> resultList = new Parser().parseToModel(jsonString, Item.ItemType.SONG, Song.class;
+ *     }
+ * </pre>
  */
 public class Parser {
 
@@ -31,7 +41,7 @@ public class Parser {
     }
 
     /**
-     * Parses the given Response instance into a {@link ResultList<Item>}.
+     * Parses the given {@link Response} instance into a {@link ResultList<Item>}.
      *
      * @param response Response instance.
      * @return ResultList of type Item.
@@ -44,7 +54,7 @@ public class Parser {
     }
 
     /**
-     * Utility method for automatically parsing a JSON string into {@link Item} subclasses.
+     * Parses the given JSON string into a {@link ResultList<T>} where T is the {@code model} value.
      *
      * @param jsonString json string to parse.
      * @param type {@link model.Item.ItemType} to search for.
@@ -58,7 +68,7 @@ public class Parser {
     }
 
     /**
-     * Utility method for automatically parsing a JSON string into {@link Item} subclasses.
+     * Parses the given {@link Response} into a {@link ResultList<T>} where T is the {@code model} value.
      *
      * @param response Response instance.
      * @param type {@link model.Item.ItemType} to search for.
