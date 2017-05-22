@@ -93,6 +93,11 @@ public final class LookupBuilder {
         return this;
     }
 
+    public LookupBuilder entity(String entity){
+        this.paramMap.put(KeyVals.LookupKeys.ENTITY, entity);
+        return this;
+    }
+
     /**
      * Converts the given array to a String with a comma separating each value.
      */

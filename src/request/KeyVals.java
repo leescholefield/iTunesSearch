@@ -35,6 +35,7 @@ public abstract class KeyVals {
         static final String ISBN = "isbn";
 
         static final String LIMIT = "limit";
+        static final String ENTITY = "entity";
     }
 
     /**
