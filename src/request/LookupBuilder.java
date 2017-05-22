@@ -6,8 +6,14 @@ import java.util.Map;
 /**
  * Utility class for constructing a new {@link Request} class.
  * <p>
+ * Please note, Apple provides very little documentation for generating lookup requests, so the information provided here
+ * is what I've been able to gather by experimenting with writing requests.
+ * <p>
  * A valid Request only requires a single id number and its associated id type. However, you can supply multiple ids
- * for each valid IdType. See ({@link LookupBuilder.IdTypes} for a list of valid types.
+ * for each Id Type. See ({@link LookupBuilder.IdTypes} for a list of valid types.
+ * <p>
+ * See <a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/">Apple
+ * documentation </a> for more information.
  */
 public final class LookupBuilder {
 
@@ -42,10 +48,8 @@ public final class LookupBuilder {
     private Map<String, String> paramMap = new HashMap<>();
 
     /**
-     * Private constructor to avoid instantiation.
-     *
      * @param idType {@link IdTypes} id.
-     * @param id id VarArg
+     * @param id ids to assign to the id type
      */
     public LookupBuilder(IdTypes idType, long... id){
         paramMap.put(idType.getKey(), convertNumberArrayToString(id));
@@ -58,41 +62,71 @@ public final class LookupBuilder {
         return new RequestImpl(paramMap, Request.LOOKUP_URL_BASE);
     }
 
+    /**
+     * Sets the itunesId. Note, there is no separate id category for artist, albums, etc. This method should be used to
+     * set any itunesId ('collectionId', 'artistId', 'trackId').
+     */
     public LookupBuilder itunesId(long ... ids){
         paramMap.put(KeyVals.LookupKeys.ITUNES_ID, convertNumberArrayToString(ids));
         return this;
     }
 
+    /**
+     * Sets the AMG (All Music Group) artist id.
+     */
     public LookupBuilder amgArtistId(long ... ids){
         paramMap.put(KeyVals.LookupKeys.AMG_ARTIST_ID, convertNumberArrayToString(ids));
         return this;
     }
 
+    /**
+     * Sets the AMG (All Music Group) album id.
+     */
     public LookupBuilder amgAlbumId(long ... ids){
         paramMap.put(KeyVals.LookupKeys.AMG_ALBUM_ID, convertNumberArrayToString(ids));
         return this;
     }
 
+    /**
+     * Sets the AMG (All Music Group) video id.
+     */
     public LookupBuilder amgVideoId(long ... ids){
         paramMap.put(KeyVals.LookupKeys.AMG_VIDEO_ID, convertNumberArrayToString(ids));
         return this;
     }
 
+    /**
+     * Sets the Universal Product Code id.
+     */
     public LookupBuilder upc(long ... ids){
         paramMap.put(KeyVals.LookupKeys.UPC, convertNumberArrayToString(ids));
         return this;
     }
 
+    /**
+     * Sets the ISBN id.
+     *
+     * See <a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number">Wikipedia entry for ISBN</a>
+     */
     public LookupBuilder isbn(long ... ids){
         paramMap.put(KeyVals.LookupKeys.ISBN, convertNumberArrayToString(ids));
         return this;
     }
 
+    /**
+     * Sets the number of results to return. The maximum is 200.
+     */
     public LookupBuilder limit(int limit){
         paramMap.put(KeyVals.LookupKeys.LIMIT, String.valueOf(limit));
         return this;
     }
 
+    /**
+     * Sets the entity associated with the media type.
+     * <p>
+     * See <a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/">
+     * Itunes Search API</a> for a list of valid values.
+     */
     public LookupBuilder entity(String entity){
         this.paramMap.put(KeyVals.LookupKeys.ENTITY, entity);
         return this;
