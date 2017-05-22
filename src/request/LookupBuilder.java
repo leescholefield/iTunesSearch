@@ -6,11 +6,29 @@ import java.util.Map;
 /**
  * Utility class for constructing a new {@link Request} class.
  * <p>
+ *
+ * You can also return a list of songs, albums, etc by combining an artist Id with a {@code entity} value. For example:
+ * <pre>
+ *     {@code
+ *     Request request = new LookupBuilder(LookupBuilder.IdTypes.ITUNES, id).entity("song").limit(10).newRequest();
+ *     Response response = request.sendRequest();
+ *
+ *     ResultList<Item> results = new Parser().parse(response);
+ *     }
+ * </pre>
+ * This will return a list of the 10 most popular songs by the artist matching the given ID. It will also contain an item
+ * for the Artist themselves. If you supple multiple IDs and an entity, it will return a list of songs of the specified
+ * limit (or 50 by default) for each artist Id given, along with an Item for each Artist.
+ * <pre>
+ *     {@code
+ *     Request request = new LookupRequest(LookupBuilder.IdTypes.ITUNES, firstId, secondId)
+ *                              .entity("song").limit(10).newRequest()
+ *     }
+ * </pre>
+ * <p>
+ *
  * Please note, Apple provides very little documentation for generating lookup requests, so the information provided here
  * is what I've been able to gather by experimenting with writing requests.
- * <p>
- * A valid Request only requires a single id number and its associated id type. However, you can supply multiple ids
- * for each Id Type. See ({@link LookupBuilder.IdTypes} for a list of valid types.
  * <p>
  * See <a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/">Apple
  * documentation </a> for more information.
