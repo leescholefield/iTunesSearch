@@ -17,11 +17,14 @@ import java.util.List;
 /**
  *  Custom {@link JsonDeserializer} that parses each element in the iTunes 'results' array.
  */
-public class ItemDeserializer implements JsonDeserializer<List<Item>> {
+class ItemDeserializer implements JsonDeserializer<List<Item>> {
 
 
     @Override
-    public List<Item> deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+    public List<Item> deserialize(JsonElement jsonElement,
+                                  Type type,
+                                  JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+
         JsonArray resultsArray = jsonElement.getAsJsonObject().getAsJsonArray("results");
         List<Item> itemList = new ArrayList<>();
         Gson gson = new Gson();
@@ -29,7 +32,7 @@ public class ItemDeserializer implements JsonDeserializer<List<Item>> {
         for (JsonElement element : resultsArray){
             JsonObject elementObject = element.getAsJsonObject();
             String wrapperType = elementObject.get("wrapperType").getAsString();
-            Class<? extends Item> c = null;
+            Class<? extends Item> modelClass = null;
 
             switch(wrapperType) {
 
@@ -37,38 +40,40 @@ public class ItemDeserializer implements JsonDeserializer<List<Item>> {
                     String kind = elementObject.get("kind").getAsString();
                     switch(kind) {
                         case "song":
-                            c = Song.class;
+                            modelClass = Song.class;
                             break;
 
                         case "music-video":
-                            c = MusicVideo.class;
+                            modelClass = MusicVideo.class;
                             break;
 
                         case "feature-movie":
-                            c = FeatureMovie.class;
+                            modelClass = FeatureMovie.class;
                             break;
 
                         case "podcast":
-                            c = Podcast.class;
+                            modelClass = Podcast.class;
+                            break;
                     }
-                    break;
+                    break; // end of track case
 
                 case "artist":
-                    c = Artist.class;
+                    modelClass = Artist.class;
                     break;
 
                 case "audiobook":
-                    c = Audiobook.class;
+                    modelClass = Audiobook.class;
                     break;
 
                 case "collection":
-                    c = Album.class;
+                    modelClass = Album.class;
                     break;
+
             } // end of switch
 
 
-            if (c != null){
-                Item item = gson.fromJson(element, c);
+            if (modelClass != null){
+                Item item = gson.fromJson(element, modelClass);
                 itemList.add(item);
             } else{
                 throw new IllegalArgumentException("Not a recognized wrapperType");
