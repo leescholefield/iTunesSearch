@@ -46,12 +46,12 @@ public final class LookupBuilder {
         private String key;
 
         static {
-            ITUNES.key = KeyVals.LookupKeys.ITUNES_ID;
-            AMG_ARTIST.key = KeyVals.LookupKeys.AMG_ARTIST_ID;
-            AMG_ALBUM.key = KeyVals.LookupKeys.AMG_ALBUM_ID;
-            AMG_VIDEO.key = KeyVals.LookupKeys.AMG_VIDEO_ID;
-            UPC.key = KeyVals.LookupKeys.UPC;
-            ISBN.key = KeyVals.LookupKeys.ISBN;
+            ITUNES.key = RequestKeys.LookupKeys.ITUNES_ID;
+            AMG_ARTIST.key = RequestKeys.LookupKeys.AMG_ARTIST_ID;
+            AMG_ALBUM.key = RequestKeys.LookupKeys.AMG_ALBUM_ID;
+            AMG_VIDEO.key = RequestKeys.LookupKeys.AMG_VIDEO_ID;
+            UPC.key = RequestKeys.LookupKeys.UPC;
+            ISBN.key = RequestKeys.LookupKeys.ISBN;
         }
 
         /**
@@ -85,7 +85,7 @@ public final class LookupBuilder {
      * set any itunesId ('collectionId', 'artistId', 'trackId').
      */
     public LookupBuilder itunesId(long ... ids){
-        paramMap.put(KeyVals.LookupKeys.ITUNES_ID, convertNumberArrayToString(ids));
+        paramMap.put(RequestKeys.LookupKeys.ITUNES_ID, convertNumberArrayToString(ids));
         return this;
     }
 
@@ -93,7 +93,7 @@ public final class LookupBuilder {
      * Sets the AMG (All Music Group) artist id.
      */
     public LookupBuilder amgArtistId(long ... ids){
-        paramMap.put(KeyVals.LookupKeys.AMG_ARTIST_ID, convertNumberArrayToString(ids));
+        paramMap.put(RequestKeys.LookupKeys.AMG_ARTIST_ID, convertNumberArrayToString(ids));
         return this;
     }
 
@@ -101,7 +101,7 @@ public final class LookupBuilder {
      * Sets the AMG (All Music Group) album id.
      */
     public LookupBuilder amgAlbumId(long ... ids){
-        paramMap.put(KeyVals.LookupKeys.AMG_ALBUM_ID, convertNumberArrayToString(ids));
+        paramMap.put(RequestKeys.LookupKeys.AMG_ALBUM_ID, convertNumberArrayToString(ids));
         return this;
     }
 
@@ -109,7 +109,7 @@ public final class LookupBuilder {
      * Sets the AMG (All Music Group) video id.
      */
     public LookupBuilder amgVideoId(long ... ids){
-        paramMap.put(KeyVals.LookupKeys.AMG_VIDEO_ID, convertNumberArrayToString(ids));
+        paramMap.put(RequestKeys.LookupKeys.AMG_VIDEO_ID, convertNumberArrayToString(ids));
         return this;
     }
 
@@ -117,7 +117,7 @@ public final class LookupBuilder {
      * Sets the Universal Product Code id.
      */
     public LookupBuilder upc(long ... ids){
-        paramMap.put(KeyVals.LookupKeys.UPC, convertNumberArrayToString(ids));
+        paramMap.put(RequestKeys.LookupKeys.UPC, convertNumberArrayToString(ids));
         return this;
     }
 
@@ -127,7 +127,7 @@ public final class LookupBuilder {
      * See <a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number">Wikipedia entry for ISBN</a>
      */
     public LookupBuilder isbn(long ... ids){
-        paramMap.put(KeyVals.LookupKeys.ISBN, convertNumberArrayToString(ids));
+        paramMap.put(RequestKeys.LookupKeys.ISBN, convertNumberArrayToString(ids));
         return this;
     }
 
@@ -135,7 +135,7 @@ public final class LookupBuilder {
      * Sets the number of results to return. The maximum is 200.
      */
     public LookupBuilder limit(int limit){
-        paramMap.put(KeyVals.LookupKeys.LIMIT, String.valueOf(limit));
+        paramMap.put(RequestKeys.LookupKeys.LIMIT, String.valueOf(limit));
         return this;
     }
 
@@ -146,7 +146,15 @@ public final class LookupBuilder {
      * Itunes Search API</a> for a list of valid values.
      */
     public LookupBuilder entity(String entity){
-        this.paramMap.put(KeyVals.LookupKeys.ENTITY, entity);
+        this.paramMap.put(RequestKeys.LookupKeys.ENTITY, entity);
+        return this;
+    }
+
+    /**
+     * Sets the sort order. Either {@code RequestKeys.Sort.POPULAR} or {@code RequestKeys.Sort.RECENT}.
+     */
+    public LookupBuilder sort(RequestKeys.Sort order){
+        this.paramMap.put(RequestKeys.LookupKeys.SORT, order.getKeyName());
         return this;
     }
 

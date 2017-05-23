@@ -35,8 +35,8 @@ public final class SearchBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newPodcastRequest() {
-        this.paramMap.put(KeyVals.SearchKeys.MEDIA, KeyVals.Entity.Podcast.PODCAST);
-        this.paramMap.put(KeyVals.SearchKeys.ENTITY, "podcast");
+        this.paramMap.put(RequestKeys.SearchKeys.MEDIA, RequestKeys.Entity.Podcast.PODCAST);
+        this.paramMap.put(RequestKeys.SearchKeys.ENTITY, "podcast");
         return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
@@ -45,8 +45,8 @@ public final class SearchBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newSongRequest() {
-        this.paramMap.put(KeyVals.SearchKeys.MEDIA, "music");
-        this.paramMap.put(KeyVals.SearchKeys.ENTITY, "song");
+        this.paramMap.put(RequestKeys.SearchKeys.MEDIA, "music");
+        this.paramMap.put(RequestKeys.SearchKeys.ENTITY, "song");
         return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
@@ -55,8 +55,8 @@ public final class SearchBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newAlbumRequest() {
-        this.paramMap.put(KeyVals.SearchKeys.MEDIA, "music");
-        this.paramMap.put(KeyVals.SearchKeys.ENTITY, "album");
+        this.paramMap.put(RequestKeys.SearchKeys.MEDIA, "music");
+        this.paramMap.put(RequestKeys.SearchKeys.ENTITY, "album");
         return new RequestImpl(paramMap,Request.SEARCH_URL_BASE);
     }
 
@@ -65,8 +65,8 @@ public final class SearchBuilder {
      * ENTITY this will override the previously set values.
      */
     public Request newMovieRequest() {
-        this.paramMap.put(KeyVals.SearchKeys.MEDIA, "movie");
-        this.paramMap.put(KeyVals.SearchKeys.ENTITY, "movie");
+        this.paramMap.put(RequestKeys.SearchKeys.MEDIA, "movie");
+        this.paramMap.put(RequestKeys.SearchKeys.ENTITY, "movie");
         return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
@@ -75,8 +75,8 @@ public final class SearchBuilder {
      * and ENTITY this will override the previously set values.
      */
     public Request newMusicArtistRequest() {
-        this.paramMap.put(KeyVals.SearchKeys.MEDIA, "music");
-        this.paramMap.put(KeyVals.SearchKeys.ENTITY, "musicArtist");
+        this.paramMap.put(RequestKeys.SearchKeys.MEDIA, "music");
+        this.paramMap.put(RequestKeys.SearchKeys.ENTITY, "musicArtist");
         return new RequestImpl(paramMap, Request.SEARCH_URL_BASE);
     }
 
@@ -93,7 +93,7 @@ public final class SearchBuilder {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        this.paramMap.put(KeyVals.SearchKeys.TERM, sanInput);
+        this.paramMap.put(RequestKeys.SearchKeys.TERM, sanInput);
     }
 
 
@@ -103,7 +103,7 @@ public final class SearchBuilder {
      * See <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO codes</a> for a list of valid codes.
      */
     public SearchBuilder country(String country) {
-        this.paramMap.put(KeyVals.SearchKeys.COUNTRY, country);
+        this.paramMap.put(RequestKeys.SearchKeys.COUNTRY, country);
         return this;
     }
 
@@ -114,7 +114,7 @@ public final class SearchBuilder {
      * software, ebook, all
      */
     public SearchBuilder media(String mediaType) {
-        this.paramMap.put(KeyVals.SearchKeys.MEDIA, mediaType);
+        this.paramMap.put(RequestKeys.SearchKeys.MEDIA, mediaType);
         return this;
     }
 
@@ -125,7 +125,7 @@ public final class SearchBuilder {
      * Itunes Search API</a> for a list of valid values.
      */
     public SearchBuilder entity(String entity) {
-        this.paramMap.put(KeyVals.SearchKeys.ENTITY, entity);
+        this.paramMap.put(RequestKeys.SearchKeys.ENTITY, entity);
         return this;
     }
 
@@ -133,7 +133,7 @@ public final class SearchBuilder {
      * Specifies the attribute you want to search for in the stores, relative to the specified media type.
      */
     public SearchBuilder attribute(String attribute) {
-        this.paramMap.put(KeyVals.SearchKeys.ATTRIBUTE, attribute);
+        this.paramMap.put(RequestKeys.SearchKeys.ATTRIBUTE, attribute);
         return this;
     }
 
@@ -144,7 +144,7 @@ public final class SearchBuilder {
      */
     public SearchBuilder limit(int limit) {
         if (limit >= 0 && limit <= 200) {
-            this.paramMap.put(KeyVals.SearchKeys.LIMIT, String.valueOf(limit));
+            this.paramMap.put(RequestKeys.SearchKeys.LIMIT, String.valueOf(limit));
             return this;
         }
         throw new IllegalArgumentException("limit must be between 0 and 200");
@@ -156,7 +156,7 @@ public final class SearchBuilder {
      * Note, the only valid values are "en_us" and "ja_jp".
      */
     public SearchBuilder language(String language) {
-        this.paramMap.put(KeyVals.SearchKeys.LANG, language);
+        this.paramMap.put(RequestKeys.SearchKeys.LANG, language);
         return this;
     }
 
@@ -168,7 +168,7 @@ public final class SearchBuilder {
         if (!explicit) {
             val = "No";
         }
-        this.paramMap.put(KeyVals.SearchKeys.EXPLICIT, val);
+        this.paramMap.put(RequestKeys.SearchKeys.EXPLICIT, val);
         return this;
     }
 
@@ -176,7 +176,15 @@ public final class SearchBuilder {
      * The offset is the number of items (from the beginning) iTunes should skip when returning results.
      */
     public SearchBuilder offset(int offset) {
-        this.paramMap.put(KeyVals.SearchKeys.OFFSET, String.valueOf(offset));
+        this.paramMap.put(RequestKeys.SearchKeys.OFFSET, String.valueOf(offset));
+        return this;
+    }
+
+    /**
+     * Sets the sort order. Either {@code RequestKeys.Sort.POPULAR} or {@code RequestKeys.Sort.RECENT}.
+     */
+    public SearchBuilder sort(RequestKeys.Sort order){
+        this.paramMap.put(RequestKeys.SearchKeys.SORT, order.getKeyName());
         return this;
     }
 
