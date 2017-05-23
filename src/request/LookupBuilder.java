@@ -152,6 +152,8 @@ public final class LookupBuilder {
 
     /**
      * Sets the sort order. Either {@code RequestKeys.Sort.POPULAR} or {@code RequestKeys.Sort.RECENT}.
+     *
+     * The default is popular.
      */
     public LookupBuilder sort(RequestKeys.Sort order){
         this.paramMap.put(RequestKeys.LookupKeys.SORT, order.getKeyName());

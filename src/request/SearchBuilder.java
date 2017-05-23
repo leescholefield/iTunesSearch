@@ -182,6 +182,8 @@ public final class SearchBuilder {
 
     /**
      * Sets the sort order. Either {@code RequestKeys.Sort.POPULAR} or {@code RequestKeys.Sort.RECENT}.
+     *
+     * The default is popular.
      */
     public SearchBuilder sort(RequestKeys.Sort order){
         this.paramMap.put(RequestKeys.SearchKeys.SORT, order.getKeyName());
