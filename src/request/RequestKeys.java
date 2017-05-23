@@ -1,15 +1,17 @@
 package request;
 
 /**
- * Utility class containing static Strings for the MEDIA and ENTITY parameters, and valid SearchKeys.
+ * Utility class containing keys and values for constructing {@link Request} instances. It uses a mixture of static classes
+ * with String fields, and Enums. Generally speaking, Enums have been used when there is a small list of valid parameters.
+ *
  * <p>
  * The use of inner classes is to make the calling code easier to read. For example, to set the Entity to albums
- * you would use {@code String entity = KeyVals.Entity.Music.ALBUM;}.
+ * you would use {@code String entity = RequestKeys.Entity.Music.ALBUM;}.
  */
-public abstract class KeyVals {
+public abstract class RequestKeys {
 
     /**
-     * List of valid parameter keys. This is package-private
+     * List of valid Search keys. This is package-private and is used internally by the {@code SearchBuilder} class.
      * <p>
      * Note, "callback" and "version", although valid, are not here since this
      * library only supports version 2 and does not support callback at all.
@@ -24,8 +26,12 @@ public abstract class KeyVals {
         static final String LANG = "lang";
         static final String EXPLICIT = "explicit";
         static final String OFFSET = "offset";
+        static final String SORT = "sort";
     }
 
+    /**
+     * List of valid Lookup keys. This is package-private and is used internally by the {@code LookupBuilder} class.
+     */
     static class LookupKeys {
         static final String ITUNES_ID = "id";
         static final String AMG_ARTIST_ID = "amgArtistId";
@@ -36,6 +42,7 @@ public abstract class KeyVals {
 
         static final String LIMIT = "limit";
         static final String ENTITY = "entity";
+        static final String SORT = "sort";
     }
 
     /**
@@ -55,13 +62,12 @@ public abstract class KeyVals {
     }
 
     /**
-     * List of valid Entity values for each MEDIA type.
+     * List of Entity values for each MEDIA type.
      */
     public static class Entity {
 
         public static class Music {
-            // Music Track includes both songs and music videos
-            public static final String MUSIC_TRACK = "musicTrack";
+            public static final String MUSIC_TRACK = "musicTrack"; // includes both songs and music videos
             public static final String ARTIST = "musicArtist";
             public static final String ALBUM = "album";
             public static final String MUSIC_VIDEO = "musicVideo";
@@ -121,5 +127,26 @@ public abstract class KeyVals {
             public static final String ALL_TRACK = "allTrack";
         }
 
+    } // end of Entity class
+
+    /**
+     * List of values for the {@code sort} option.
+     */
+    public enum Sort {
+        POPULAR, RECENT;
+
+        private String key;
+
+        static {
+            POPULAR.key = "popular";
+            RECENT.key = "recent";
+        }
+
+        /**
+         * Package-private method used to convert to a String key to be stored in the {@code []Builder.paramMap}.
+         */
+        String getKeyName(){
+            return key;
+        }
     }
 }
