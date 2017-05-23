@@ -104,11 +104,11 @@ class RequestImpl implements Request {
      * use the iTunes defined default of 50.
      */
     private void addLimitToOffset(){
-        int limit = Integer.parseInt(paramMap.getOrDefault(KeyVals.SearchKeys.LIMIT, "50"));
+        int limit = Integer.parseInt(paramMap.getOrDefault(RequestKeys.SearchKeys.LIMIT, "50"));
         offset = offset + limit;
     }
 
     private static String createOffsetParam(int offset){
-        return "&" + KeyVals.SearchKeys.OFFSET + "=" + String.valueOf(offset);
+        return "&" + RequestKeys.SearchKeys.OFFSET + "=" + String.valueOf(offset);
     }
 }
