@@ -85,13 +85,14 @@ public final class SearchBuilder {
      * The term is the only required param for constructing a {@link Request}.
      *
      * @param term term to search for.
+     * @throws IllegalArgumentException if the term could not be sanitized.
      */
-    public SearchBuilder(String term) {
+    public SearchBuilder(String term) throws IllegalArgumentException {
         String sanInput = null;
         try {
             sanInput = URLEncoder.encode(term, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException(term + " could not be sanitized", e);
         }
         this.paramMap.put(RequestKeys.SearchKeys.TERM, sanInput);
     }
